@@ -1,0 +1,20 @@
+{
+  "name": "react-xss",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "start": "docker-compose up",
+    "seed": "node ./backend/seed.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/victoroliveirab/react-xss.git"
+  },
+  "keywords": [],
+  "author": "Victor Oliveira Barbosa",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/victoroliveirab/react-xss/issues"
+  },
+  "homepage": "https://github.com/victoroliveirab/react-xss#readme"
+}

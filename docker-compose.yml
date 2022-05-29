@@ -1,0 +1,46 @@
+version: "3.8"
+services:
+  mongo:
+    image: mongo
+    container_name: react-xss-mongodb
+    environment:
+      - MONGO_INITDB_DATABASE=react-xss-samples
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=admin
+    volumes:
+      - ./infra/db.js:/docker-entrypoint-initdb.d/init.js:ro
+      - ./infra/data:/data/db
+    ports:
+      - 27017:27017
+    restart: unless-stopped
+    networks:
+      - react-xss-net
+
+  backend:
+    build: ./backend
+    container_name: react-xss-backend
+    ports:
+      - 8080:8080
+    volumes:
+      - ./backend/logs/npm:/root/.npm/_logs
+      - ./backend/index.js:/app/index.js
+    depends_on:
+      - mongo
+    networks:
+      - react-xss-net
+
+  frontend:
+    build: ./frontend
+    container_name: react-xss-frontend
+    ports:
+      - 3000:3000
+    volumes:
+      - ./frontend/src:/app/src
+    depends_on:
+      - backend
+    networks:
+      - react-xss-net
+
+networks:
+  react-xss-net:
+    driver: bridge
