@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { get, post } from "../http";
+import { get, post } from "../../http";
 
 export default function PlainTagComponent() {
   const [text, setText] = useState("");
