@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
+    "build": "docker-compose build",
     "start": "docker-compose up",
     "seed": "node ./backend/seed.js"
   },
