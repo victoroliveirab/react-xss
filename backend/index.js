@@ -1,6 +1,6 @@
 const http = require("http");
 const { MongoClient } = require("mongodb");
-const { buildInfoHTML } = require("./utils");
+const { bodyFromReq, buildInfoHTML } = require("./utils");
 
 const MONGO_URL = "mongodb://admin:admin@mongo:27017";
 const MONGO_DATABASE = "react-xss-samples";
@@ -36,8 +36,8 @@ async function saveData(tableName, data) {
   }
 }
 
-function plainTagHandler({ body, method }, res) {
-  if (method === "GET") {
+async function plainTagHandler(req, res) {
+  if (req.method === "GET") {
     res.statusCode = 200;
     getDataFromTable("PlainTag").then((data) => {
       res.write(JSON.stringify({ data: buildInfoHTML(data) }));
@@ -46,8 +46,9 @@ function plainTagHandler({ body, method }, res) {
     return;
   }
 
-  if (method === "POST") {
+  if (req.method === "POST") {
     res.statusCode = 201;
+    const body = await bodyFromReq(req);
     saveData("PlainTag", body).then((data) => {
       res.write(JSON.stringify({ data }));
       res.end();

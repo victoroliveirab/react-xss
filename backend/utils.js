@@ -11,3 +11,18 @@ module.exports.buildInfoHTML = function (data) {
       `,
   }));
 };
+
+module.exports.bodyFromReq = function (req) {
+  return new Promise((resolve, reject) => {
+    try {
+      const chunks = [];
+      req.on("data", (chunk) => chunks.push(chunk));
+      req.on("end", () => {
+        const data = JSON.parse(Buffer.concat(chunks).toString());
+        resolve(data);
+      });
+    } catch (err) {
+      reject(err);
+    }
+  });
+};
