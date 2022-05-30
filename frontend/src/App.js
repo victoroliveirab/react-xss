@@ -1,6 +1,13 @@
-import { get } from "./http";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+import PlainTagComponent from "./pages/plain-tag";
 
 export default function App() {
-  get("http://localhost:8080").then((data) => console.log(data));
-  return <div>Hello World!</div>;
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/plain-tag" element={<PlainTagComponent />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
