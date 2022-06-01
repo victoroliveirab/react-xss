@@ -57,6 +57,27 @@ async function plainTagHandler(req, res) {
   }
 }
 
+async function hrefAbuseHandler(req, res) {
+  if (req.method === "GET") {
+    res.statusCode = 200;
+    getDataFromTable("HrefAbuse").then((data) => {
+      res.write(JSON.stringify({ data }));
+      res.end();
+    });
+    return;
+  }
+
+  if (req.method === "POST") {
+    res.statusCode = 201;
+    const body = await bodyFromReq(req);
+    saveData("HrefAbuse", body).then((data) => {
+      res.write(JSON.stringify({ data }));
+      res.end();
+    });
+    return;
+  }
+}
+
 http
   .createServer((req, res) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
@@ -78,10 +99,10 @@ http
           return plainTagHandler(req, res);
         }
         case "inner-html": {
-          return;
+          return plainTagHandler(req, res);
         }
         case "href-abuse": {
-          return;
+          return hrefAbuseHandler(req, res);
         }
         case "prop-spreading": {
           return;
