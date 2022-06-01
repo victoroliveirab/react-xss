@@ -1,4 +1,4 @@
-export default function InnerHTMLDefault() {
+export default function InnerHtmlDefault() {
   return (
     <ul>
       <li>
