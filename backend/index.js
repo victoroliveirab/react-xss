@@ -99,6 +99,27 @@ async function propSpreadingHandler(req, res) {
   }
 }
 
+async function cssInJsHandler(req, res) {
+  if (req.method === "GET") {
+    res.statusCode = 200;
+    getDataFromTable("CssInJs").then(([data]) => {
+      res.write(JSON.stringify({ data }));
+      res.end();
+    });
+    return;
+  }
+
+  if (req.method === "POST") {
+    res.statusCode = 201;
+    const body = await bodyFromReq(req);
+    saveData("CssInJs", body).then((data) => {
+      res.write(JSON.stringify({ data }));
+      res.end();
+    });
+    return;
+  }
+}
+
 http
   .createServer((req, res) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
@@ -129,7 +150,7 @@ http
           return propSpreadingHandler(req, res);
         }
         case "css-in-js": {
-          return;
+          return cssInJsHandler(req, res);
         }
       }
     } catch (err) {
