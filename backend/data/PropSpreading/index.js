@@ -9,6 +9,9 @@ const data = [
       color: "#000",
       backgroundColor: "#ccc",
     },
+    dangerouslySetInnerHTML: {
+      __html: "<img onerror='alert(\"Hacked!\");' src='invalid-image' />",
+    },
   },
 ];
 
