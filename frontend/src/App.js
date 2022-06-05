@@ -14,6 +14,10 @@ import PropSpreadingDefault from "./pages/prop-spreading";
 import PropSpreadingVulnerable from "./pages/prop-spreading/vulnerable";
 import PropSpreadingFixed from "./pages/prop-spreading/fixed";
 
+import CssInJsDefault from "./pages/css-in-js";
+import CssInJsVulnerable from "./pages/css-in-js/vulnerable";
+import CssInJsFixed from "./pages/css-in-js/fixed";
+
 export default function App() {
   return (
     <BrowserRouter>
@@ -37,6 +41,9 @@ export default function App() {
           element={<PropSpreadingVulnerable />}
         />
         <Route path="/prop-spreading/fixed" element={<PropSpreadingFixed />} />
+        <Route path="/css-in-js" element={<CssInJsDefault />} />
+        <Route path="/css-in-js/vulnerable" element={<CssInJsVulnerable />} />
+        <Route path="/css-in-js/fixed" element={<CssInJsFixed />} />
       </Routes>
     </BrowserRouter>
   );
