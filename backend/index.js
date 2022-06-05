@@ -78,6 +78,27 @@ async function hrefAbuseHandler(req, res) {
   }
 }
 
+async function propSpreadingHandler(req, res) {
+  if (req.method === "GET") {
+    res.statusCode = 200;
+    getDataFromTable("PropSpreading").then(([data]) => {
+      res.write(JSON.stringify({ data }));
+      res.end();
+    });
+    return;
+  }
+
+  if (req.method === "POST") {
+    res.statusCode = 201;
+    const body = await bodyFromReq(req);
+    saveData("PropSpreading", body).then((data) => {
+      res.write(JSON.stringify({ data }));
+      res.end();
+    });
+    return;
+  }
+}
+
 http
   .createServer((req, res) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
@@ -105,7 +126,7 @@ http
           return hrefAbuseHandler(req, res);
         }
         case "prop-spreading": {
-          return;
+          return propSpreadingHandler(req, res);
         }
         case "css-in-js": {
           return;
