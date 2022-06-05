@@ -10,6 +10,10 @@ import HrefAbuseDefault from "./pages/href-abuse";
 import HrefAbuseVulnerable from "./pages/href-abuse/vulnerable";
 import HrefAbuseFixed from "./pages/href-abuse/fixed";
 
+import PropSpreadingDefault from "./pages/prop-spreading";
+import PropSpreadingVulnerable from "./pages/prop-spreading/vulnerable";
+import PropSpreadingFixed from "./pages/prop-spreading/fixed";
+
 export default function App() {
   return (
     <BrowserRouter>
@@ -27,6 +31,12 @@ export default function App() {
           element={<HrefAbuseVulnerable />}
         />
         <Route path="/href-abuse/fixed" element={<HrefAbuseFixed />} />
+        <Route path="/prop-spreading" element={<PropSpreadingDefault />} />
+        <Route
+          path="/prop-spreading/vulnerable"
+          element={<PropSpreadingVulnerable />}
+        />
+        <Route path="/prop-spreading/fixed" element={<PropSpreadingFixed />} />
       </Routes>
     </BrowserRouter>
   );
