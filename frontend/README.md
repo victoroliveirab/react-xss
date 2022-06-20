@@ -1,70 +1,25 @@
-# Getting Started with Create React App
+# XSS Vulnerabilities Experiments with React Development
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This study was split into 5 different experiments.
 
-## Available Scripts
+## Experiments
 
-In the project directory, you can run:
+### [Direct Insertion](/src/pages/plain-tag)
 
-### `npm start`
+JSX syntax allows React to insert variable contents directly into code. For instance, a user's input in a text field can be stored in a state variable and injected into the page via JSX. The goal of this experiment is to determine if there's any treatment for the case a malicious user types valid HTML syntax in the text field.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Insertion via property `dangerouslySetInnerHTML`
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+React defines a property called `dangerouslySetInnerHTML` which allows the developer direct access to DOM's `innerHTML` method. This method is the main gateway for Cross-Site Scripting attacks and here the goal is to understand the path an input goes until is indeed inserted into the DOM.
 
-### `npm test`
+### Hyperlink's `href` property
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+One of the ways to deceive an unwarned visitor is to execute malicious JavaScript code after they click on a hyperlink. Hyperlinks are elements used in web pages to perform some action - mainly navigation between different pages. The goal of this experiment is to verify if React allows this way of executing arbitrary code.
 
-### `npm run build`
+### Malicious Code Injection via props
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Props are one of the key features of JSX syntax in React. This concept allows an application built in these technologies to have code highly componentized, combinable, and reuseable. For instance, it is possible to make generic components behave differently based on props. The goal of this experiment is to verify if tampered props can allow an XSS attack to happen.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Malicious CSS Injection via CSS-in-JS
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+The JavaScript-oriented development brought with it libraries such as `styled-components` and `emotion` which allow a developer to write CSS inside JavaScript. The goal of this experiment is to verify if this code pattern can expose a user to an XSS attack.
