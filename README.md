@@ -17,3 +17,7 @@ This folder holds MongoDB container files and a config js file.
 ### Frontend
 
 The frontend is written in JSX using React. More information [here](/frontend/).
+
+## Work
+
+The final thesis can be read [TBD](/) in pt-BR.
