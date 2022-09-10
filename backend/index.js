@@ -152,6 +152,13 @@ http
         case "css-in-js": {
           return cssInJsHandler(req, res);
         }
+        case "health-check": {
+          console.log(">>> health-check <<<");
+          res.statusCode = 200;
+          res.write(JSON.stringify({ status: "ok" }));
+          res.end();
+          return;
+        }
       }
     } catch (err) {
       res.statusCode = 500;
